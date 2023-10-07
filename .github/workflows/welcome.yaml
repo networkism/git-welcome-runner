@@ -10,7 +10,7 @@ jobs:
   git-welcome:
     runs-on: ubuntu-latest
     steps: 
-      - name: Welcome to Issues
+      - name: This is Issues
         if: github.event_name == 'issues' && github.event.action == 'opened'
         uses: actions/github-script@v3
         with: 
@@ -23,7 +23,7 @@ jobs:
               body: "Thank you for submitting an issue! 🚀 We appreciate your input and will get back to you as soon as possible." 
             })
 
-      - name: Welcome to Pull Requests
+      - name: This is Pull Requests
         if: github.event_name == 'pull_request' && github.event.action == 'opened'
         uses: actions/github-script@v3
         with: 
