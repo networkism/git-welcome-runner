@@ -1,0 +1,39 @@
+name: Welcome New Contributos
+
+on: 
+  issues:
+    types: [opened]
+  pull_request:
+    types: [opened]
+
+jobs:
+  git-welcome:
+    runs-on: ubuntu-latest
+      steps: 
+      - name: Wecome to Issues
+        if: github.event_name == 'issues' && github.event.actions == 'opened'
+        uses: actions/github-script@v3
+        with: 
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.issue.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: "Thank you for submitting an issue! 🚀 We appreciate your input and will get back to you as soon as possible." 
+            })
+
+      - name: Welcome to Pull Requests
+        if: github.event_name == 'pull_request' && github.event.actions == 'opened'
+        uses: actions/github-script@v3
+        with: 
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: "Thank you for your pull request! 🎉 Our team will review your submission and get back to you as soon as possible."
+            })
+
+  
